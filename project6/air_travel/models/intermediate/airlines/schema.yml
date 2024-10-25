@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: Airline
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: country
+        tests:
+          - relationships:
+              to: ref('Country')
+              field: name

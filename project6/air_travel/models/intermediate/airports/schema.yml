@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: Airport
+    columns:
+      - name: icao
+        tests:
+          - unique
+          - not_null

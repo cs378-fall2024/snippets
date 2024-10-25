@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: Airport_Businesses
+    tests:
+      - unique_combination_of_columns: 
+          combination_of_columns:
+            - icao
+            - terminal
+            - business
+            - location

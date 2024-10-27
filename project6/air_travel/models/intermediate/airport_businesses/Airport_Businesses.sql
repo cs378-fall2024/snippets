@@ -1,7 +1,3 @@
-/* {{ config(
-    post_hook="alter table {{ this }} add primary key (icao, terminal, business, location) not enforced"
-) }} */
-
 with int_Airport_Businesses as (
 	 select distinct a.icao, b.terminal, b.business, b.location
 	 from {{ ref('airport_businesses') }} b join {{ ref('Airport') }} a

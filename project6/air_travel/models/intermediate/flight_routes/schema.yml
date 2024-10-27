@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: Flight_Routes
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: route_id
+        data_type: int64
+        constraints:
+          - type: primary_key
+        tests:
+          - unique
+          - not_null
+      - name: airline_id
+        data_type: int64
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Airline
+            to_columns: [id]
+        tests:
+          - relationships:
+              to: ref('Airline')
+              field: id
+          - not_null
+      - name: source_airport_icao
+        data_type: string
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Airport
+            to_columns: [icao]
+        tests:
+          - relationships:
+              to: ref('Airport')
+              field: icao
+      - name: dest_airport_icao
+        data_type: string
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Airport
+            to_columns: [icao]
+        tests:
+          - relationships:
+              to: ref('Airport')
+              field: icao
+      - name: codeshare
+        data_type: boolean
+      - name: stops
+        data_type: int64
+  - name: Route_Equipment
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: route_id
+        data_type: int64
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Flight_Routes
+            to_columns: [route_id]
+        tests:
+          - not_null
+      - name: aircraft_icao
+        data_type: string
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Aircraft
+            to_columns: [icao]
+        tests:
+          - not_null
+    tests:
+      - unique_combination_of_columns: 
+          combination_of_columns:
+            - route_id
+            - aircraft_icao
+

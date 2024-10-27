@@ -1,5 +1,8 @@
 {{ config(
-    post_hook="alter table {{ ref('Business') }} drop column if exists menu_items" 
+    post_hook=["alter table {{ ref('Business') }} drop column if exists menu_items",
+			   "alter table {{ this }} add primary key (business_name, menu_item) not enforced",
+ 			   "alter table {{ this }} add constraint menu_items_fk_business_name foreign key (business_name)
+     		  	  references {{ ref('Business') }} (name) not enforced"]
 ) }}
 
 with int_Menu_Items as (

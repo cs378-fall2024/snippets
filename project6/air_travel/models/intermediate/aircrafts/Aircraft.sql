@@ -1,8 +1,8 @@
 {{ config(
     post_hook=["delete from {{ this }} where icao = 'B737' and iata = '737'",
-		 	   "delete from {{ this }} where icao = 'E135' and iata = 'ERD'", 
-			   "drop table {{ ref('tmp_aircrafts') }}",
-			   "alter table {{ this }} add primary key (icao) not enforced"] 
+		 	   "delete from {{ this }} where icao = 'E135' and iata = 'ERD'",
+			   "delete from {{ this }} where icao = 'A338' and name = 'Airbus A330-700 Beluga XL'",
+			   "delete from {{ this }} where icao = 'B737' and iata = '73G' and name = 'Boeing 737'"] 
 ) }}
 
 with int_Aircraft as (

@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: Flight_Delays
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [event_month, airline_id, airport_icao]
+    columns:
+      - name: event_month
+        data_type: date
+      - name: airline_id
+        data_type: int64
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Airline
+            to_columns: [id]
+        tests:
+          - relationships:
+              to: ref('Airline')
+              field: id
+          - not_null
+      - name: airport_icao
+        data_type: string
+        constraints:
+          - type: foreign_key
+            to: dbt_air_travel_int.Airport
+            to_columns: [icao]
+        tests:
+          - relationships:
+              to: ref('Airport')
+              field: icao
+          - not_null
+      - name: arr_total
+        data_type: int64
+      - name: arr_cancelled
+        data_type: int64
+      - name: arr_diverted
+        data_type: int64
+      - name: arr_delay_min
+        data_type: int64
+      - name: weather_delay_min
+        data_type: int64
+      - name: nas_delay_min
+        data_type: int64
+      - name: late_aircraft_delay_min
+        data_type: int64
+    tests:
+      - unique_combination_of_columns: 
+          combination_of_columns:
+            - event_month
+            - airline_id
+            - airport_icao

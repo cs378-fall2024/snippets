@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: Airline
+  - name: Airport_Review
     config:
       contract:
         enforced: true
@@ -13,12 +13,8 @@ models:
         tests:
           - unique
           - not_null
-      - name: name
-        data_type: string
-      - name: alias
-        data_type: string
-      - name: iata
-        data_type: string
+      - name: thread_id
+        data_type: int64
       - name: icao
         data_type: string
         constraints:
@@ -29,17 +25,15 @@ models:
           - relationships:
               to: ref('Airport')
               field: icao
-      - name: callsign
+      - name: date_created
+        data_type: datetime
+      - name: author
         data_type: string
-      - name: country
+      - name: subject
         data_type: string
-        constraints:
-          - type: foreign_key
-            to: dbt_air_travel_int.Country
-            to_columns: [name]
-        tests:
-          - relationships:
-              to: ref('Country')
-              field: name
-      - name: active
+      - name: body
+        data_type: string
+      - name: relevance
         data_type: boolean
+      - name: sentiment
+        data_type: string

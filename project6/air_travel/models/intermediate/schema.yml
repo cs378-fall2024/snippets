@@ -1,19 +1,19 @@
 version: 2
 
 models:
-  - name: Aircraft
+  - name: Country
     config:
       contract:
         enforced: true
     columns:
-      - name: icao
+      - name: name
         data_type: string
         constraints:
           - type: primary_key
         tests:
           - unique
           - not_null
-      - name: iata
+      - name: iso_code
         data_type: string
-      - name: name
-        data_type: string
+      - name: dafif_codes
+        data_type: array<string>

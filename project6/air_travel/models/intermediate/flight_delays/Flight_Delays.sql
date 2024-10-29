@@ -5,6 +5,7 @@ with int_Flight_Delays as (
 	 from {{ ref('tmp_flight_delays') }} fd join {{ ref('Airline') }} al
 	 on fd.carrier = al.iata
 	 where al.country = 'United States'
+	 and fd.airport_icao in (select icao from {{ ref('Airport') }})
 )
 
 select *

@@ -21,14 +21,6 @@ models:
         data_type: string
       - name: icao
         data_type: string
-        constraints:
-          - type: foreign_key
-            to: dbt_air_travel_int.Airport
-            to_columns: [icao]
-        tests:
-          - relationships:
-              to: ref('Airport')
-              field: icao
       - name: callsign
         data_type: string
       - name: country

@@ -17,8 +17,8 @@ models:
             to_columns: [icao]
         tests:
           - relationships:
-              to: ref('Country')
-              field: name
+              to: ref('Airport')
+              field: icao
         tests:
           - not_null
       - name: terminal
@@ -33,7 +33,7 @@ models:
             to_columns: [name]
         tests:
           - relationships:
-              to: ref('Country')
+              to: ref('Business')
               field: name
         tests:
           - not_null

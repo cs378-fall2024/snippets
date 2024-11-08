@@ -2,8 +2,8 @@
     post_hook=["delete from {{ this }} where icao is null",
 			   "delete from {{ this }} where source = 'User' and icao in 
 			   		(select icao from {{ this }} group by icao having count(*) > 1)",
-			   "insert into {{ ref('Country') }} (name) select distinct country from {{ this }} 
-				  where country not in (select name from {{ ref('Country') }})"] 
+				"insert into {{ ref('Country') }} (name) select distinct country from {{ this }} 
+				    where country not in (select name from {{ ref('Country') }})"] 
 ) }} 
 
 with int_Airport as (

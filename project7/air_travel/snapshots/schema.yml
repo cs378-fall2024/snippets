@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: air_travel_raw
+    database: cs378-fa2024
+    schema: inc_air_travel_raw  
+    tables:
+      - name: airports
+      - name: airport_reviews
+      - name: tsa_traffic
